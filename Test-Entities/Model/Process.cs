@@ -12,5 +12,6 @@ namespace Test_Entities.Model
         [Key]
         public int ProcessId { get; set; }
         public string ProcessDescription { get; set; }
+
     }
 }

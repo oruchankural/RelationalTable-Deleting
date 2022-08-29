@@ -28,6 +28,8 @@
     <Compile Include="Migrations\20220829193417_db-v-8.Designer.cs" />
     <Compile Include="Migrations\20220829194502_db-v-9.cs" />
     <Compile Include="Migrations\20220829194502_db-v-9.Designer.cs" />
+    <Compile Include="Migrations\20220829195430_db-v-10.cs" />
+    <Compile Include="Migrations\20220829195430_db-v-10.Designer.cs" />
     <Compile Include="Migrations\ContextModelSnapshot.cs" />
   </ItemGroup>
 

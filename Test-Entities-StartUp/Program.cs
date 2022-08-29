@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Collections.Generic;
 
+
 namespace Test_Entities_StartUp
 {
     public class Program
@@ -15,9 +16,10 @@ namespace Test_Entities_StartUp
             //CreateTicket();
             //CreateSurvey();
             //CreateSurvey();
-          
+
+            //var ticket = c.Tickets.Find(4);
            
-            var range = c.Tickets.Where(x => x.TicketId == 3).Include(y => y.Survey);
+            var range = c.Tickets.Where(x => x.TicketId == 4).Include(y => y.Survey);
             c.RemoveRange(range);
             c.SaveChangesAsync();
 
@@ -26,6 +28,7 @@ namespace Test_Entities_StartUp
         public static void CreateTicket()
         {
             Context c = new Context();
+
             Ticket ticket = new Ticket { TicketCode = "FEY-1" };
 
             c.Tickets.Add(ticket);
@@ -37,13 +40,15 @@ namespace Test_Entities_StartUp
             Context c = new Context();
            
 
-            var ticket = c.Tickets.Find(3);
+            var ticket = c.Tickets.Find(4);
             Survey survey = new Survey { Message = "Test"};
             ticket.Survey = survey;
 
             var process = c.Processes.Where(x => x.ProcessId == 2).SingleOrDefault();
+            var process2 = c.Processes.Where(x => x.ProcessId == 1).SingleOrDefault();
 
             ticket.Process = process;
+            ticket.Process2 = process2;
             c.Update(ticket);
 
 

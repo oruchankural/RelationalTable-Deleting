@@ -15,6 +15,9 @@ namespace Test_Entities.Model
 
         virtual public Survey Survey { get; set; }
         virtual public Process Process { get; set; }
+        virtual public Process Process2 { get; set; }
+
+
     }
 
 }
