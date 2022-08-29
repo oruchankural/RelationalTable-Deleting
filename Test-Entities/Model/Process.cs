@@ -7,16 +7,10 @@ using System.Threading.Tasks;
 
 namespace Test_Entities.Model
 {
-    public class Ticket
+    public class Process
     {
         [Key]
-        public int TicketId { get; set; }
-        public string TicketCode { get; set; }
-
-        virtual public Survey Survey { get; set; }
-        virtual public Process Process { get; set; }
+        public int ProcessId { get; set; }
+        public string ProcessDescription { get; set; }
     }
-
 }
-
-

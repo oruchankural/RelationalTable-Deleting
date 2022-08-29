@@ -23,15 +23,20 @@ namespace Test_Entities.Model
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer_Question> Answer_Questions { get; set; }
+        public DbSet<Process> Processes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ticket>().HasOne(x => x.Survey).WithOne()
                 .HasForeignKey<Survey>(x=>x.SurveyId).OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<Survey>().HasMany(x => x.Answer_Question).WithOne().HasForeignKey(x => x.Answer_QuestionId)
+            modelBuilder.Entity<Survey>().HasMany(x => x.Answer_Question).WithOne().HasForeignKey(x => x.SurveyId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            
+
+            /*modelBuilder.Entity<Survey>().HasMany(x => x.Answer_Question).WithOne().HasForeignKey(x => x.)
+                .OnDelete(DeleteBehavior.Cascade);*/
+
+
 
             //modelBuilder.Entity<Survey>().HasOne(x => x.Ticket).WithOne(x => x.Survey).OnDelete(DeleteBehavior.Cascade);
         }

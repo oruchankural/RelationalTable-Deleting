@@ -12,6 +12,7 @@ namespace Test_Entities.Model
         [Key]
         public int Answer_QuestionId { get; set; }
 
+        public int SurveyId { get; set; }
 
         virtual public Question Question { get; set; }
         virtual public Answer Answer { get; set; }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Test_Entities.Model;
 
 namespace Test_Entities.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20220829193417_db-v-8")]
+    partial class dbv8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -57,20 +59,6 @@ namespace Test_Entities.Migrations
                     b.ToTable("Answer_Questions");
                 });
 
-            modelBuilder.Entity("Test_Entities.Model.Process", b =>
-                {
-                    b.Property<int>("ProcessId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("ProcessDescription")
-                        .HasColumnType("text");
-
-                    b.HasKey("ProcessId");
-
-                    b.ToTable("Processes");
-                });
-
             modelBuilder.Entity("Test_Entities.Model.Question", b =>
                 {
                     b.Property<int>("QuestionId")
@@ -104,15 +92,10 @@ namespace Test_Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProcessId")
-                        .HasColumnType("int");
-
                     b.Property<string>("TicketCode")
                         .HasColumnType("text");
 
                     b.HasKey("TicketId");
-
-                    b.HasIndex("ProcessId");
 
                     b.ToTable("Tickets");
                 });
@@ -145,15 +128,6 @@ namespace Test_Entities.Migrations
                         .HasForeignKey("Test_Entities.Model.Survey", "SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Test_Entities.Model.Ticket", b =>
-                {
-                    b.HasOne("Test_Entities.Model.Process", "Process")
-                        .WithMany()
-                        .HasForeignKey("ProcessId");
-
-                    b.Navigation("Process");
                 });
 
             modelBuilder.Entity("Test_Entities.Model.Survey", b =>

@@ -20,6 +20,14 @@
     <Compile Include="Migrations\20220829184307_db-v-3.Designer.cs" />
     <Compile Include="Migrations\20220829184753_db-v-4.cs" />
     <Compile Include="Migrations\20220829184753_db-v-4.Designer.cs" />
+    <Compile Include="Migrations\20220829191218_db-v-5.cs" />
+    <Compile Include="Migrations\20220829191218_db-v-5.Designer.cs" />
+    <Compile Include="Migrations\20220829192815_db-v-7.cs" />
+    <Compile Include="Migrations\20220829192815_db-v-7.Designer.cs" />
+    <Compile Include="Migrations\20220829193417_db-v-8.cs" />
+    <Compile Include="Migrations\20220829193417_db-v-8.Designer.cs" />
+    <Compile Include="Migrations\20220829194502_db-v-9.cs" />
+    <Compile Include="Migrations\20220829194502_db-v-9.Designer.cs" />
     <Compile Include="Migrations\ContextModelSnapshot.cs" />
   </ItemGroup>
 
