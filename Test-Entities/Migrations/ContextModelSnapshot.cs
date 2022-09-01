@@ -31,9 +31,9 @@ namespace Test_Entities.Migrations
                     b.ToTable("Answers");
                 });
 
-            modelBuilder.Entity("Test_Entities.Model.Answer_Question", b =>
+            modelBuilder.Entity("Test_Entities.Model.AnswerQuestion", b =>
                 {
-                    b.Property<int>("Answer_QuestionId")
+                    b.Property<int>("AnswerQuestionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -46,7 +46,7 @@ namespace Test_Entities.Migrations
                     b.Property<int>("SurveyId")
                         .HasColumnType("int");
 
-                    b.HasKey("Answer_QuestionId");
+                    b.HasKey("AnswerQuestionId");
 
                     b.HasIndex("AnswerId");
 
@@ -55,6 +55,20 @@ namespace Test_Entities.Migrations
                     b.HasIndex("SurveyId");
 
                     b.ToTable("Answer_Questions");
+                });
+
+            modelBuilder.Entity("Test_Entities.Model.Firm", b =>
+                {
+                    b.Property<int>("FirmId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("FirmCode")
+                        .HasColumnType("text");
+
+                    b.HasKey("FirmId");
+
+                    b.ToTable("Firm");
                 });
 
             modelBuilder.Entity("Test_Entities.Model.Process", b =>
@@ -87,13 +101,20 @@ namespace Test_Entities.Migrations
 
             modelBuilder.Entity("Test_Entities.Model.Survey", b =>
                 {
-                    b.Property<int>("SurveyId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     b.Property<string>("Message")
                         .HasColumnType("text");
 
-                    b.HasKey("SurveyId");
+                    b.Property<int>("TicketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TicketId")
+                        .IsUnique();
 
                     b.ToTable("Surveys");
                 });
@@ -104,10 +125,13 @@ namespace Test_Entities.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("Process2ProcessId")
+                    b.Property<int?>("ProcessId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProcessId")
+                    b.Property<int?>("ReceiverUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SenderUserId")
                         .HasColumnType("int");
 
                     b.Property<string>("TicketCode")
@@ -115,14 +139,35 @@ namespace Test_Entities.Migrations
 
                     b.HasKey("TicketId");
 
-                    b.HasIndex("Process2ProcessId");
-
                     b.HasIndex("ProcessId");
+
+                    b.HasIndex("ReceiverUserId");
+
+                    b.HasIndex("SenderUserId");
 
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("Test_Entities.Model.Answer_Question", b =>
+            modelBuilder.Entity("Test_Entities.Model.User", b =>
+                {
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int?>("FirmId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("text");
+
+                    b.HasKey("UserId");
+
+                    b.HasIndex("FirmId");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Test_Entities.Model.AnswerQuestion", b =>
                 {
                     b.HasOne("Test_Entities.Model.Answer", "Answer")
                         .WithMany()
@@ -133,7 +178,7 @@ namespace Test_Entities.Migrations
                         .HasForeignKey("QuestionId");
 
                     b.HasOne("Test_Entities.Model.Survey", null)
-                        .WithMany("Answer_Question")
+                        .WithMany("AnswerQuestion")
                         .HasForeignKey("SurveyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -147,29 +192,44 @@ namespace Test_Entities.Migrations
                 {
                     b.HasOne("Test_Entities.Model.Ticket", null)
                         .WithOne("Survey")
-                        .HasForeignKey("Test_Entities.Model.Survey", "SurveyId")
+                        .HasForeignKey("Test_Entities.Model.Survey", "TicketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Test_Entities.Model.Ticket", b =>
                 {
-                    b.HasOne("Test_Entities.Model.Process", "Process2")
-                        .WithMany()
-                        .HasForeignKey("Process2ProcessId");
-
                     b.HasOne("Test_Entities.Model.Process", "Process")
                         .WithMany()
                         .HasForeignKey("ProcessId");
 
+                    b.HasOne("Test_Entities.Model.User", "Receiver")
+                        .WithMany()
+                        .HasForeignKey("ReceiverUserId");
+
+                    b.HasOne("Test_Entities.Model.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderUserId");
+
                     b.Navigation("Process");
 
-                    b.Navigation("Process2");
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
+            modelBuilder.Entity("Test_Entities.Model.User", b =>
+                {
+                    b.HasOne("Test_Entities.Model.Firm", "Firm")
+                        .WithMany()
+                        .HasForeignKey("FirmId");
+
+                    b.Navigation("Firm");
                 });
 
             modelBuilder.Entity("Test_Entities.Model.Survey", b =>
                 {
-                    b.Navigation("Answer_Question");
+                    b.Navigation("AnswerQuestion");
                 });
 
             modelBuilder.Entity("Test_Entities.Model.Ticket", b =>

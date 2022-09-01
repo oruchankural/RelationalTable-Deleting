@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 
 namespace Test_Entities.Model
 {
-    public class Survey
+    public class Survey : IEntity
     {
         [Key]
-        public int SurveyId { get; set; }
+        public int Id { get; set; }
+        public int TicketId { get; set; }
         public string Message { get; set; }
         
         
-        virtual public List<Answer_Question> Answer_Question { get; set; }
+        virtual public List<AnswerQuestion> AnswerQuestion { get; set; }
     }
 }

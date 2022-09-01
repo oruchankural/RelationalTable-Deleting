@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Test_Entities.Model
 {
-    public class Question
+    public class Question : IEntity
     {
         [Key]
         public int QuestionId { get; set; }
